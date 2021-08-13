@@ -23,4 +23,5 @@ jobs:
         run: octo list-deployments --server=${{ secrets.OCTOPUS_SERVER }} --apiKey=${{ secrets.OCTOPUS_APIKEY }}
              
       - name: push package
-        run: octo push --package ${{ secrets.DOCKER_HUB_USERNAME }}/randomquotes-js:latest --replace-existing --server=${{ secrets.OCTOPUS_SERVER }} --apiKey=${{ secrets.OCTOPUS_APIKEY }}
+        run: docker build . -t randomquotes
+        run: octo push --package randomquotes --replace-existing --server=${{ secrets.OCTOPUS_SERVER }} --apiKey=${{ secrets.OCTOPUS_APIKEY }}
