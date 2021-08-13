@@ -4,11 +4,8 @@ env:
   serverURL: your_server_name
 
 on:
-   push:
-     branches: [ main ]
-   pull_request:
-     branches: [ main ]
-
+  push:
+    branches: [ master ]
 jobs:
 
   build:
