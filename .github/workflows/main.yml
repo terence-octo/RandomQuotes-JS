@@ -1,7 +1,4 @@
-name: listdeployments
-
-env:
-  serverURL: your_server_name
+name: deploytoazure
 
 on:
   push:
