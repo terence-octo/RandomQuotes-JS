@@ -22,8 +22,18 @@ jobs:
       - name: list-octopusdeploy-deployments
         run: octo list-deployments --server=${{ secrets.OCTOPUS_SERVER }} --apiKey=${{ secrets.OCTOPUS_APIKEY }}
              
-      - name: build package
-        run: docker build . -t randomquotes
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/randomquotes-js:latest
+          
+      - name: sleep
+        run: sleep 600
       
-      - name: push package
-        run: octo push --package randomquotes --replace-existing --server=${{ secrets.OCTOPUS_SERVER }} --apiKey=${{ secrets.OCTOPUS_APIKEY }}
+      - name: create Octopus release
+        run: octo create-release --project docker --version 0.0.87 --server=${{ secrets.OCTOPUS_SERVER }} --apiKey=${{ secrets.OCTOPUS_APIKEY }}
+
