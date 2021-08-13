@@ -20,7 +20,7 @@ jobs:
           version: latest
           
       - name: list-octopusdeploy-deployments
-        run: octo list-deployments --server=${{ env.serverURL }} --apiKey=${{ secrets.apiKey }}
+        run: octo list-deployments --server=${{ secrets.OCTOPUS_SERVER }} --apiKey=${{ secrets.OCTOPUS_APIKEY }}
         
       - name: Build and push
         id: docker_build
@@ -32,4 +32,4 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/randomquotes-js:latest
         
       - name: push package
-        run: octo push --package ${{ secrets.DOCKER_HUB_USERNAME }}/randomquotes-js:latest --replace-existing --server=${{ env.serverURL }} --apiKey=${{ secrets.apiKey }}
+        run: octo push --package ${{ secrets.DOCKER_HUB_USERNAME }}/randomquotes-js:latest --replace-existing --server=${{ secrets.OCTOPUS_SERVER }} --apiKey=${{ secrets.OCTOPUS_APIKEY }}
