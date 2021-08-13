@@ -22,6 +22,8 @@ jobs:
       - name: list-octopusdeploy-deployments
         run: octo list-deployments --server=${{ secrets.OCTOPUS_SERVER }} --apiKey=${{ secrets.OCTOPUS_APIKEY }}
              
-      - name: push package
+      - name: build package
         run: docker build . -t randomquotes
+      
+      - name: push package
         run: octo push --package randomquotes --replace-existing --server=${{ secrets.OCTOPUS_SERVER }} --apiKey=${{ secrets.OCTOPUS_APIKEY }}
