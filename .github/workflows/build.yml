@@ -12,4 +12,3 @@ jobs:
           registry: gcr.io
           project_id: rock-bulwark-324105
           image_name: random-quotes-gcr
-          
